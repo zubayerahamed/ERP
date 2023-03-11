@@ -44,6 +44,10 @@ Route::prefix('admin')->group(function () {
 
         // Category
         Route::get("/category", [CategoryController::class, 'index'])->name("category.page");
+        Route::post("/category", [CategoryController::class, 'save'])->name("category.save");
+        Route::get("/category/{slug}", [CategoryController::class, 'edit'])->name("category.edit");
+        Route::put("/category/{category}", [CategoryController::class, 'update'])->name("category.update");
+        Route::delete("/category/{slug}", [CategoryController::class, 'delete'])->name("category.delete");
     });
 });
 

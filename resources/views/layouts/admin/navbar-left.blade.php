@@ -3,7 +3,7 @@
     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
         <!-- Add icons to the links using the .nav-icon class with font-awesome or any other icon font library -->
         <li class="nav-item">
-            <a href="{{ url(route('admin.dashboard')) }}" class="nav-link {{ Route::currentRouteName() == 'admin.dashboard' ? 'active' : '' }}">
+            <a href="{{ route('admin.dashboard') }}" class="nav-link {{ Route::currentRouteName() == 'admin.dashboard' ? 'active' : '' }}">
                 <i class="nav-icon fas fa-tachometer-alt"></i>
                 <p>
                     Dashboard
@@ -11,7 +11,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a href="{{ url(route('category.page')) }}" class="nav-link {{ Route::currentRouteName() == 'category.page' ? 'active' : '' }}">
+            <a href="{{ route('category.page') }}" class="nav-link {{ Route::currentRouteName() == 'category.page' ? 'active' : '' }}">
                 <i class="nav-icon fas fa-th"></i>
                 <p>
                     Category
