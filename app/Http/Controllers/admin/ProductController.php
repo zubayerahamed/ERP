@@ -7,5 +7,11 @@ use Illuminate\Http\Request;
 
 class ProductController extends KitController
 {
-    //
+    public function index(){
+        return view('admin.products');
+    }
+
+    public function addNewPage(){
+        return view('admin.product-create');
+    }
 }

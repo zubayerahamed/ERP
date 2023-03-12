@@ -20,6 +20,11 @@ class Category extends Model
         'active'
     ];
 
+    public function getImageAttribute($value)
+    {
+        return $value ? '/upload/category/' . $value : "/assets/admin-assets/img/category-default.png";
+    }
+
     public function getParentCategory()
     {
         return $this->hasOne(Category::class, 'id', 'parent_category_id');
