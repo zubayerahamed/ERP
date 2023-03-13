@@ -6,20 +6,18 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Product extends Model
+class Media extends Model
 {
     use HasFactory;
     use SoftDeletes;
 
     protected $fillable = [
         'title',
-        'short_desc',
-        'desc',
-        'thumbnail',
-        'active'
+        'original_name',
+        'media_type',
+        'file_path',
+        'alternative_name',
+        'caption',
+        'description'
     ];
-
-    public function categories(){
-        return $this->belongsToMany(Category::class, 'products_categories');
-    }
 }

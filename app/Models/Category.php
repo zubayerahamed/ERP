@@ -73,4 +73,16 @@ class Category extends Model
         }
         return $allCategoriesExceptChildsAndSelf;
     }
+
+
+    public static function nestable($categories)
+    {
+        foreach ($categories as $category) {
+            if (!$category->getChildCategories->isEmpty()) {
+                $category->getChildCategories = self::nestable($category->children);
+            }
+        }
+
+        return $categories;
+    }
 }
