@@ -12,38 +12,60 @@ class ProductController extends KitController
 {
     public function index()
     {
-        return view('admin.products');
+        return view('admin.products', [
+            'products' => Product::all()
+        ]);
     }
 
     public function addNewPage()
     {
 
         return view('admin.product-create', [
-            'categories' => Category::whereNull('parent_category_id')->get()
+            'categories' => Category::whereNull('parent_category_id')->get(),
+            'product' => new Product()
         ]);
     }
 
-    public function save(Request $request){
-//        dd($request->all());
+    public function edit(Product $product)
+    {
 
+        // $a = $product->categories->all();
+        // dd($product->categories->all());
 
-        // $product = new Product();
-        // $product->name = $request['name'];
-        // $product->desc = $request['desc'];
-        // $product->short_desc = $request['short_desc'];
+        return view('admin.product-create', [
+            'categories' => Category::whereNull('parent_category_id')->get(),
+            'product' => $product
+        ]);
+    }
 
-        $request['user_id'] = Auth::guard('admin')->user()->id;
+    public function save(Request $request)
+    {
         $product = Product::create($request->all());
 
         $categories = Category::whereIn('id', $request['categories'])->get();
-        //dd($categories->all());
 
         $product->categories()->attach($categories);
 
         $saved = $product->save();
-        if($saved){
-            return redirect()->route('product.add-new')->with('success', 'Product created successfully');
+        if ($saved) {
+            return redirect()->route('product.edit', $product->id)->with('success', 'Product created successfully');
         }
-        return redirect()->route('product.add-new')->with('error', 'Product not created');
+        return back()->with('error', 'Product not created');
+    }
+
+    public function update(Product $product, Request $request)
+    {
+
+        $product->categories()->detach();
+
+        $categories = Category::whereIn('id', $request['categories'])->get();
+        $product->categories()->attach($categories);
+
+        $updated = $product->update($request->all());
+
+        if ($updated) {
+            return redirect()->route('product.edit', $product->id)->with('success', 'Product updated successfully');
+        }
+        return back()->with('error', 'Product not update');
     }
 }

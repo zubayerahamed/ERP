@@ -10,8 +10,8 @@
                 </p>
             </a>
         </li>
-        <li class="nav-item {{ Route::currentRouteName() == 'product.list' || Route::currentRouteName() == 'product.add-new' || Route::currentRouteName() == 'category.page' ? 'menu-open' : '' }}">
-            <a href="#" class="nav-link {{ Route::currentRouteName() == 'product.list' || Route::currentRouteName() == 'product.add-new' || Route::currentRouteName() == 'category.page' ? 'active' : '' }}">
+        <li class="nav-item {{ Request::is('admin/term**') || Request::is('admin/attribute**') || Request::is('admin/product**') || Request::is('admin/category**') ? 'menu-open' : '' }}">
+            <a href="#" class="nav-link {{ Request::is('admin/term**') || Request::is('admin/attribute**') || Request::is('admin/product**') || Request::is('admin/category**') ? 'active' : '' }}">
                 <i class="nav-icon fas fa-box"></i>
                 <p>
                     Products
@@ -44,15 +44,9 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="../../index3.html" class="nav-link">
+                    <a href="{{ route('attribute.page') }}" class="nav-link {{ Route::currentRouteName() == 'attribute.page' ? 'active' : '' }}">
                         <i class="fas fa-minus nav-icon"></i>
                         <p>Attributes</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="../../index3.html" class="nav-link">
-                        <i class="fas fa-minus nav-icon"></i>
-                        <p>Reviews</p>
                     </a>
                 </li>
             </ul>

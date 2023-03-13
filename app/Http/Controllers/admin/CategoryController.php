@@ -22,7 +22,8 @@ class CategoryController extends KitController
     {
 
         $request->validate([
-            'name' => 'required'
+            'name' => 'required',
+            'seqn' => 'required'
         ]);
 
         $slug = $request->get('slug');
@@ -57,11 +58,13 @@ class CategoryController extends KitController
     {
 
         $request->validate([
-            'name' => 'required'
+            'name' => 'required',
+            'seqn' => 'required'
         ]);
 
         $rf = $request->all();
         $category->name = $rf['name'];
+        $category->seqn = $rf['seqn'];
         if ($rf['parent_category_id'] != null || $rf['parent_category_id'] != '') $category->parent_category_id = $rf['parent_category_id'];
         if ($request->get('active') != null) {
             $category->active = true;

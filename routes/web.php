@@ -6,6 +6,8 @@ use App\Http\Controllers\admin\AdminRegisterController;
 use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\DashboardController;
 use App\Http\Controllers\admin\ProductController;
+use App\Http\Controllers\AttributeController;
+use App\Http\Controllers\TermController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -52,9 +54,26 @@ Route::prefix('admin')->group(function () {
         Route::get("/products", [ProductController::class, 'index'])->name("product.list");
         Route::get("/product/add-new", [ProductController::class, 'addNewPage'])->name("product.add-new");
         Route::post("/product/save", [ProductController::class, 'save'])->name("product.save");
-        Route::get("/product/{product}/edit", [ProductController::class, 'editPage'])->name("product.edit");
+        Route::get("/product/{product}/edit", [ProductController::class, 'edit'])->name("product.edit");
         Route::put("/product/{product}/update", [ProductController::class, 'update'])->name("product.update");
+        Route::delete("/product/{product}/trash", [ProductController::class, 'trash'])->name("product.trash");
         Route::delete("/product/{product}/delete", [ProductController::class, 'delete'])->name("product.delete");
+
+        // Attribute
+        Route::get("/attribute", [AttributeController::class, 'index'])->name("attribute.page");
+        Route::post("/attribute", [AttributeController::class, 'save'])->name("attribute.save");
+        Route::get("/attribute/{slug}", [AttributeController::class, 'edit'])->name("attribute.edit");
+        Route::put("/attribute/{attribute}", [AttributeController::class, 'update'])->name("attribute.update");
+        Route::delete("/attribute/{slug}/trash", [AttributeController::class, 'trash'])->name("attribute.trash");
+        Route::delete("/attribute/{slug}/delete", [AttributeController::class, 'delete'])->name("attribute.delete");
+    
+        // Term
+        Route::get("/term/{attribute}", [TermController::class, 'index'])->name("term.page");
+        Route::post("/term", [TermController::class, 'save'])->name("term.save");
+        Route::get("/term/{slug}", [TermController::class, 'edit'])->name("term.edit");
+        Route::put("/term/{term}", [TermController::class, 'update'])->name("term.update");
+        Route::delete("/term/{slug}/trash", [TermController::class, 'trash'])->name("term.trash");
+        Route::delete("/term/{slug}/delete", [TermController::class, 'delete'])->name("term.delete");
     });
 });
 

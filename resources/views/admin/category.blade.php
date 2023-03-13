@@ -73,7 +73,7 @@
                     </div>
                     <div class="form-group">
                         <label for="seqn">Sequence</label>
-                        <input type="number" class="form-control" name="seqn" placeholder="Sequence" min="0" step="1" value="0">
+                        <input type="number" class="form-control" name="seqn" placeholder="Sequence" min="0" step="1" value="{{ old('seqn', $category->seqn == null ? 0 : $category->seqn) }}">
                     </div>
                     <div class="form-group">
                         <div class="custom-control custom-checkbox">

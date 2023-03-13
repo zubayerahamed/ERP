@@ -1,18 +1,21 @@
 @extends('layouts.admin.main')
 @push('title')
-    <title>Admin - Add New Product</title>
+    <title>Admin - {{ $product->id != null ? 'Edit Product' : 'Add New Product' }}</title>
 @endpush
 @section('vendor-styles')
     <x-data-table-css></x-data-table-css>
 @endsection
 @push('content-heading')
-    <x-content-heading pageHeading="Add New Product" showBredCrumb="true"></x-content-heading>
+    <x-content-heading pageHeading="{{ $product->id != null ? 'Edit Product' : 'Add New Product' }}" showBredCrumb="true"></x-content-heading>
 @endpush
 @section('admin-main')
-    <form action="{{ route('product.save') }}" method="POST" style="display: inline-block; width: 100%; padding: 0; margin: 0; box-sizing: border-box;">
+    <form action="{{ $product->id == null ? route('product.save') : route('product.update', $product->id) }}" method="POST" style="display: inline-block; width: 100%; padding: 0; margin: 0; box-sizing: border-box;">
+        @csrf
+        @if ($product->id != null)
+            @method('PUT')
+        @endif
         <div class="col-md-12">
             <div class="row">
-                @csrf
                 <div class="col-md-9">
                     <div class="card">
                         <div class="card-header">
@@ -21,7 +24,7 @@
                         <!-- /.card-header -->
                         <div class="card-body">
                             <div class="form-group">
-                                <input type="text" class="form-control" name="title" placeholder="Enter Product Name" value="{{ old('title') }}" required>
+                                <input type="text" class="form-control" name="title" placeholder="Enter Product Name" value="{{ old('title', $product->title) }}" required>
                                 @error('title')
                                     <div class="form-text text-danger"><i class="ph-x-circle me-1"></i>{{ $message }}</div>
                                 @enderror
@@ -38,7 +41,7 @@
                         <!-- /.card-header -->
                         <div class="card-body">
                             <div class="form-group">
-                                <textarea class="form-control" name="desc">{{ old('desc') }}</textarea>
+                                <textarea class="form-control" name="desc">{{ old('desc', $product->desc) }}</textarea>
                                 @error('desc')
                                     <div class="form-text text-danger"><i class="ph-x-circle me-1"></i>{{ $message }}</div>
                                 @enderror
@@ -65,7 +68,7 @@
                         <!-- /.card-header -->
                         <div class="card-body">
                             <div class="form-group">
-                                <textarea class="form-control" name="short_desc">{{ old('short_desc') }}</textarea>
+                                <textarea class="form-control" name="short_desc">{{ old('short_desc', $product->short_desc) }}</textarea>
                                 @error('short_desc')
                                     <div class="form-text text-danger"><i class="ph-x-circle me-1"></i>{{ $message }}</div>
                                 @enderror
@@ -95,10 +98,10 @@
                             <h3 class="card-title">Product Categories</h3>
                         </div>
                         <!-- /.card-header -->
-                        <div class="card-body">
+                        <div class="card-body" style="max-height: 300px; overflow: auto;">
                             <div class="form-group">
                                 <!-- Recursive way of displaying category -->
-                                @include('layouts.inc.category-recursive', ['categories' => $categories, 'margin' => 0])
+                                @include('layouts.inc.category-recursive', ['categories' => $categories, 'margin' => 0, 'product' => $product])
                             </div>
                         </div>
                     </div>
