@@ -61,6 +61,7 @@ class AttributeController extends KitController
         $rf = $request->all();
         $attribute->name = $rf['name'];
         $attribute->seqn = $rf['seqn'];
+        $attribute->filter_type = $rf['filter_type'];
         if ($request->get('active') != null) {
             $attribute->active = true;
         } else {

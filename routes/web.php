@@ -70,7 +70,7 @@ Route::prefix('admin')->group(function () {
         // Term
         Route::get("/term/{attribute}", [TermController::class, 'index'])->name("term.page");
         Route::post("/term", [TermController::class, 'save'])->name("term.save");
-        Route::get("/term/{slug}", [TermController::class, 'edit'])->name("term.edit");
+        Route::get("/term/{slug}/edit", [TermController::class, 'edit'])->name("term.edit");
         Route::put("/term/{term}", [TermController::class, 'update'])->name("term.update");
         Route::delete("/term/{slug}/trash", [TermController::class, 'trash'])->name("term.trash");
         Route::delete("/term/{slug}/delete", [TermController::class, 'delete'])->name("term.delete");

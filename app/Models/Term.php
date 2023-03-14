@@ -17,4 +17,8 @@ class Term extends Model
         'seqn',
         'active'
     ];
+
+    public function attribute(){
+        return $this->belongsTo(Attribute::class, 'attribute_id');
+    }
 }

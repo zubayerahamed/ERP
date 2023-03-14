@@ -34,6 +34,13 @@
                         <input type="text" class="form-control" name="slug" value="{{ old('slug', $attribute->slug) }}" placeholder="Enter Attribute Slug" {{ $attribute->id != null ? 'readonly' : '' }}>
                     </div>
                     <div class="form-group">
+                        <label for="filter_type">Filter Type</label>
+                        <select name="filter_type" class="form-control">
+                            <option value="CHECKBOX" {{ old('filter_type', $attribute->filter_type) == 'CHECKBOX' ? 'selected' : '' }}>Multiple Selection</option>
+                            <option value="RADIO" {{ old('filter_type', $attribute->filter_type) == 'RADIO' ? 'selected' : '' }}>Single Selection</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
                         <label for="seqn">Sequence</label>
                         <input type="number" class="form-control" name="seqn" placeholder="Sequence" min="0" step="1" value="{{ old('seqn', $attribute->seqn == null ? 0 : $attribute->seqn) }}">
                         @error('seqn')
@@ -77,7 +84,12 @@
                             <tr>
                                 <td><a href="{{ route('attribute.edit', $attribute->slug) }}">{{ $attribute->name }}</a></td>
                                 <td>{{ $attribute->seqn }}</td>
-                                <td>
+                                <td style="font-size: 12px">
+                                    @foreach ($attribute->getTerms as $term)
+                                        <li style="display: inline-block; list-style: none; padding: 5px 10px; background: #ddd; border-radius: 5px; cursor: pointer; margin-right: 5px;"><a href="{{ route('term.edit', $term->slug) }}">{{ $term->name }}</a></li>
+                                    @endforeach
+                                    <br/>
+                                    <br/>
                                     <a href="{{ route('term.page', $attribute->id) }}">Configure terms</a>
                                 </td>
                                 <td class="text-center">

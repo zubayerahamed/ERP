@@ -6,13 +6,13 @@
     <x-data-table-css></x-data-table-css>
 @endsection
 @push('content-heading')
-    <x-content-heading pageHeading="term" showBredCrumb="true"></x-content-heading>
+    <x-content-heading pageHeading="Term" showBredCrumb="true"></x-content-heading>
 @endpush
 @section('admin-main')
     <div class="col-md-4">
         <div class="card card-warning">
             <div class="card-header">
-                <h3 class="card-title">Crate Term</h3>
+                <h3 class="card-title">Crate Term for Attribute <b>{{ $attribute->name }}</b></h3>
             </div>
             <!-- /.card-header -->
             <form id="mainform" action="{{ $term->id == null ? route('term.save') : route('term.update', $term->id) }}" method="POST">
@@ -21,17 +21,18 @@
                     @method('PUT')
                 @endif
 
+                <input type="hidden" name="attribute_id" value="{{ $attribute->id }}"/>
                 <div class="card-body">
                     <div class="form-group">
                         <label for="name">Name</label>
-                        <input type="text" class="form-control" name="name" placeholder="Enter term Name" value="{{ old('name', $term->name) }}" required>
+                        <input type="text" class="form-control" name="name" placeholder="Enter Term Name" value="{{ old('name', $term->name) }}" required>
                         @error('name')
                             <div class="form-text text-danger"><i class="ph-x-circle me-1"></i>{{ $message }}</div>
                         @enderror
                     </div>
                     <div class="form-group">
                         <label for="slug">Slug</label>
-                        <input type="text" class="form-control" name="slug" value="{{ old('slug', $term->slug) }}" placeholder="Enter term Slug" {{ $term->id != null ? 'readonly' : '' }}>
+                        <input type="text" class="form-control" name="slug" value="{{ old('slug', $term->slug) }}" placeholder="Enter Term Slug" {{ $term->id != null ? 'readonly' : '' }}>
                     </div>
                     <div class="form-group">
                         <label for="seqn">Sequence</label>
@@ -48,7 +49,7 @@
                     </div>
                 </div>
                 <div class="card-footer text-right">
-                    <a href="{{ route('term.page') }}" class="btn btn-warning">Clear</a>
+                    <a href="{{ route('term.page', $attribute->id) }}" class="btn btn-warning">Clear</a>
                     <button type="submit" class="btn btn-success">Submit</button>
                 </div>
             </form>
