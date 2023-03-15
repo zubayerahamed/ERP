@@ -50,6 +50,30 @@
                     </a>
                 </li>
             </ul>
+            
+        </li>
+        <li class="nav-item {{ Request::is('admin/media**') ? 'menu-open' : '' }}">
+            <a href="#" class="nav-link {{ Request::is('admin/media**') ? 'active' : '' }}">
+                <i class="fas fa-photo-video nav-icon"></i>
+                <p>
+                    Media
+                    <i class="right fas fa-angle-left"></i>
+                </p>
+            </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="{{ route('media') }}" class="nav-link {{ Route::currentRouteName() == 'media' ? 'active' : '' }}">
+                        <i class="fas fa-minus nav-icon"></i>
+                        <p>Library</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('media.add-new') }}" class="nav-link {{ Route::currentRouteName() == 'media.add-new' ? 'active' : '' }}">
+                        <i class="fas fa-minus nav-icon"></i>
+                        <p>Add New</p>
+                    </a>
+                </li>
+            </ul>
         </li>
     </ul>
 </nav>

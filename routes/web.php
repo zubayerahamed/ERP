@@ -7,6 +7,7 @@ use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\DashboardController;
 use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\AttributeController;
+use App\Http\Controllers\MediaController;
 use App\Http\Controllers\TermController;
 use Illuminate\Support\Facades\Route;
 
@@ -74,6 +75,11 @@ Route::prefix('admin')->group(function () {
         Route::put("/term/{term}", [TermController::class, 'update'])->name("term.update");
         Route::delete("/term/{slug}/trash", [TermController::class, 'trash'])->name("term.trash");
         Route::delete("/term/{slug}/delete", [TermController::class, 'delete'])->name("term.delete");
+    
+        // Media
+        Route::get('/media', [MediaController::class, 'index'])->name('media');
+        Route::get('/media/add-new', [MediaController::class, 'addNewPage'])->name('media.add-new');
+        Route::post("/media/save", [MediaController::class, 'save'])->name("media.save");
     });
 });
 

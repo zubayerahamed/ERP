@@ -13978,7 +13978,7 @@ body:not(.layout-fixed) .main-sidebar .sidebar {
 }
 
 .main-sidebar {
-    height: 100vh;
+    height: 100vh !important;
     overflow-y: hidden;
     z-index: 1038;
 }
