@@ -108,7 +108,7 @@
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
             },
-            type: 'POST',
+            method: "post",
             thumbnailWidth: 80,
             thumbnailHeight: 80,
             parallelUploads: 20,

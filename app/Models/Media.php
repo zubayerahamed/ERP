@@ -20,4 +20,9 @@ class Media extends Model
         'caption',
         'description'
     ];
+
+    public function getFileAttribute()
+    {
+        return $this->file_path . $this->title;
+    }
 }

@@ -5,6 +5,37 @@
 @section('vendor-styles')
     <x-data-table-css></x-data-table-css>
 @endsection
+@section('custom-page-styles')
+    <style>
+        .media-wrapper{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        .media-container {
+            width: 150px;
+            height: 150px;
+            padding: 10px;
+            margin: 10px;
+            border: 1px dotted rgb(87, 86, 86);
+            background: #fff;
+            box-sizing: border-box;
+            float: left;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0px 0px 5px #ddd;
+            cursor: pointer;
+        }
+
+        .media-container>img {
+            width: 100%;
+        }
+
+        .media-container:hover{
+            opacity: 0.5;
+        }
+    </style>
+@endsection
 @push('content-heading')
     <x-content-heading pageHeading="Media" showBredCrumb="true"></x-content-heading>
 @endpush
@@ -16,8 +47,14 @@
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-                
-                data
+
+                <div class="media-wrapper">
+                    @foreach ($medias as $media)
+                        <div class="media-container">
+                            <img src="{{ $media->file }}" />
+                        </div>
+                    @endforeach
+                </div>
 
             </div>
             <!-- /.card-body -->

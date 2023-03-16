@@ -7,34 +7,48 @@ use Illuminate\Http\Request;
 
 class MediaController extends Controller
 {
-    public function index(){
-        return view('admin.media');
+    public function index()
+    {
+        return view('admin.media', [
+            'medias' => Media::all()
+        ]);
     }
 
-    public function addNewPage(){
+    public function addNewPage()
+    {
         return view('admin.media-create');
     }
 
-    public function save(Request $request){
-        $folderPath = public_path('upload/media/');
+    public function save(Request $request)
+    {
 
-        $image_parts = explode(";base64,", $request->image);
-        $image_type_aux = explode("image/", $image_parts[0]);
-        $image_type = $image_type_aux[1];
-        $image_base64 = base64_decode($image_parts[1]);
+        $image = $request->file('file');
+        $mediaType = $image->getMimeType();
+        $originalName = $image->getClientOriginalName();
+        $extention = pathinfo($originalName, PATHINFO_EXTENSION);
 
-        $imageName = uniqid() . '.png';
+        $uploadPath = 'upload/media/' . date('Y') . '/' . date('m') . '/' . date('d');
+        $fullDirectory = public_path($uploadPath);
+        $newFileName = uniqid() . '.' . $extention;
 
-        $imageFullPath = $folderPath . $imageName;
+        $image->move($fullDirectory, $newFileName);
 
+        $media = new Media();
+        $media->title = $newFileName;
+        $media->original_name = $originalName;
+        $media->media_type = $mediaType;
+        $media->file_path = '/' . $uploadPath . '/';
 
-        if (!is_dir($folderPath)) {
-            mkdir($folderPath);
+        $saved = $media->save();
+
+        if ($saved) {
+            return response()->json([
+                'status' => 'success',
+                'message' => 'File uploaded successfully',
+                'filename' => $media->file_path . $media->title
+            ]);
         }
 
-        file_put_contents($imageFullPath, $image_base64);
-
-
-        return response()->json(['success' => $prevImagePath]);
+        return response()->json(['status' => 'error', 'message' => 'File not uploaded']);
     }
 }
