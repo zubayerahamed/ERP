@@ -29,7 +29,11 @@
                     <tbody>
                         @foreach ($products as $product)
                             <tr>
-                                <td>{{ $product->thumbnail }}</td>
+                                <td>
+                                    @if ($product->getThumbnail != null)
+                                        <img src="{{ $product->getThumbnail->file }}" alt="" id="product-thumbnail" style="width: 50px; height: 50px;">    
+                                    @endif
+                                </td>
                                 <td>
                                     <p class="text-bold mb-0"><a href="{{ route('product.edit', $product->id) }}">{{ $product->title }}</a></p>
                                     <span>{{ 'ID:' . $product->id }} | <a href="{{ route('product.edit', $product->id) }}" alt="Edit Product">Edit</a> | <a href="{{ route('product.trash', $product->id) }}" alt="Trash Product">Trash</a></span>

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('short_desc')->nullable();
             $table->string('desc')->nullable();
-            $table->string('thumbnail')->nullable();
+            $table->foreignId('thumbnail_id')->nullable()->references('id')->on('media');
             $table->boolean('active')->default(true);
             $table->softDeletes();
             $table->timestamps();
