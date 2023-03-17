@@ -3,7 +3,7 @@
         <input class="form-check-input" type="checkbox" name="categories[]" value="{{ $cat->id }}" {{ $product->hasCategory($cat->slug) ? 'checked' : '' }}>
         <label class="form-check-label">{{ $cat->name }}</label>
     </div>
-    @if ($cat->getChildCategories)
-        @include('layouts.inc.category-recursive', ['categories' => $cat->getChildCategories, 'margin' => $margin + 20, 'product' => $product])
+    @if ($cat->childCategories)
+        @include('layouts.inc.category-recursive', ['categories' => $cat->childCategories, 'margin' => $margin + 20, 'product' => $product])
     @endif
 @endforeach

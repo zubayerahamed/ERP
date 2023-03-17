@@ -30,8 +30,8 @@
                         @foreach ($products as $product)
                             <tr>
                                 <td>
-                                    @if ($product->getThumbnail != null)
-                                        <img src="{{ $product->getThumbnail->file }}" alt="" id="product-thumbnail" style="width: 50px; height: 50px;">    
+                                    @if ($product->thumbnail != null)
+                                        <img src="{{ $product->thumbnail->file }}" alt="" id="product-thumbnail" style="width: 50px; height: 50px;">    
                                     @endif
                                 </td>
                                 <td>

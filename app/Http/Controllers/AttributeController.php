@@ -11,16 +11,16 @@ class AttributeController extends KitController
     public function index()
     {
         return view('admin.attribute', [
-            'attributes' => Attribute::all(),
+            'attributes' => Attribute::with('terms')->get(),
             'attribute' => new Attribute()
         ]);
     }
 
-    public function edit($slug)
+    public function edit(Attribute $attribute)
     {
         return view('admin.attribute', [
-            'attributes' => Attribute::all(),
-            'attribute' => Attribute::where('slug', '=', $slug)->firstOrFail()
+            'attributes' => Attribute::with('terms')->get(),
+            'attribute' => $attribute
         ]);
     }
 
@@ -32,7 +32,11 @@ class AttributeController extends KitController
         ]);
 
         $slug = $request->get('slug');
-        if ($slug == '') $slug = strtolower(str_replace(" ", "-", trim($request->get('name'))));
+        if ($slug == '') {
+            $slug = strtolower(str_replace(" ", "-", trim($request->get('name'))));
+        } else {
+            $slug = strtolower(str_replace(" ", "-", trim($request->get('slug'))));
+        }
 
         $rf = $request->all();
         $rf['slug'] = $slug;

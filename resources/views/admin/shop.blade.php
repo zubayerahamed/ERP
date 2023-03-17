@@ -1,61 +1,55 @@
 @extends('layouts.admin.main')
 @push('title')
-    <title>Admin - Attribute</title>
+    <title>Admin - Shop</title>
 @endpush
 @section('vendor-styles')
     <x-data-table-css></x-data-table-css>
 @endsection
 @push('content-heading')
-    <x-content-heading pageHeading="Attribute" showBredCrumb="true"></x-content-heading>
+    <x-content-heading pageHeading="Shop" showBredCrumb="false"></x-content-heading>
 @endpush
 @section('admin-main')
     <div class="col-md-4">
         <div class="card card-warning">
             <div class="card-header">
-                <h3 class="card-title">Crate Attribute</h3>
+                <h3 class="card-title">Crate Shop for Outlet <b><a href="{{ route('outlet.edit', $outlet->slug) }}">{{ $outlet->name }}</a></b></h3>
             </div>
             <!-- /.card-header -->
-            <form id="mainform" action="{{ $attribute->id == null ? route('attribute.save') : route('attribute.update', $attribute->id) }}" method="POST">
+            <form id="mainform" action="{{ $shop->id == null ? route('shop.save') : route('shop.update', $shop->id) }}" method="POST">
                 @csrf
-                @if ($attribute->id != null)
+                @if ($shop->id != null)
                     @method('PUT')
                 @endif
 
+                <input type="hidden" name="outlet_id" value="{{ $outlet->id }}"/>
                 <div class="card-body">
                     <div class="form-group">
                         <label for="name">Name</label>
-                        <input type="text" class="form-control" name="name" placeholder="Enter Attribute Name" value="{{ old('name', $attribute->name) }}" required>
+                        <input type="text" class="form-control" name="name" placeholder="Enter Shop Name" value="{{ old('name', $shop->name) }}" required>
                         @error('name')
                             <div class="form-text text-danger"><i class="ph-x-circle me-1"></i>{{ $message }}</div>
                         @enderror
                     </div>
                     <div class="form-group">
                         <label for="slug">Slug</label>
-                        <input type="text" class="form-control" name="slug" value="{{ old('slug', $attribute->slug) }}" placeholder="Enter Attribute Slug" {{ $attribute->id != null ? 'readonly' : '' }}>
-                    </div>
-                    <div class="form-group">
-                        <label for="filter_type">Filter Type</label>
-                        <select name="filter_type" class="form-control">
-                            <option value="CHECKBOX" {{ old('filter_type', $attribute->filter_type) == 'CHECKBOX' ? 'selected' : '' }}>Multiple Selection</option>
-                            <option value="RADIO" {{ old('filter_type', $attribute->filter_type) == 'RADIO' ? 'selected' : '' }}>Single Selection</option>
-                        </select>
+                        <input type="text" class="form-control" name="slug" value="{{ old('slug', $shop->slug) }}" placeholder="Enter Shop Slug" {{ $shop->id != null ? 'readonly' : '' }}>
                     </div>
                     <div class="form-group">
                         <label for="seqn">Sequence</label>
-                        <input type="number" class="form-control" name="seqn" placeholder="Sequence" min="0" step="1" value="{{ old('seqn', $attribute->seqn == null ? 0 : $attribute->seqn) }}">
+                        <input type="number" class="form-control" name="seqn" placeholder="Sequence" min="0" step="1" value="{{ old('seqn', $shop->seqn == null ? 0 : $shop->seqn) }}">
                         @error('seqn')
                             <div class="form-text text-danger"><i class="ph-x-circle me-1"></i>{{ $message }}</div>
                         @enderror
                     </div>
                     <div class="form-group">
                         <div class="custom-control custom-checkbox">
-                            <input class="custom-control-input" type="checkbox" id="customCheckbox2" name="active" {{ $attribute->id == null || $attribute->active ? 'checked' : '' }}>
+                            <input class="custom-control-input" type="checkbox" id="customCheckbox2" name="active" {{ $shop->id == null || $shop->active ? 'checked' : '' }}>
                             <label for="customCheckbox2" class="custom-control-label">Active?</label>
                         </div>
                     </div>
                 </div>
                 <div class="card-footer text-right">
-                    <a href="{{ route('attribute.page') }}" class="btn btn-warning">Clear</a>
+                    <a href="{{ route('shop.page', $outlet->id) }}" class="btn btn-warning">Clear</a>
                     <button type="submit" class="btn btn-success">Submit</button>
                 </div>
             </form>
@@ -66,7 +60,7 @@
     <div class="col-md-8">
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title">List of Attributes</h3>
+                <h3 class="card-title">List of shops</h3>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
@@ -75,39 +69,30 @@
                         <tr>
                             <th>Name</th>
                             <th>Sequence</th>
-                            <th>Terms</th>
+                            <th>Counters</th>
                             <th class="text-center">Active Status</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($attributes as $attribute)
+                        @foreach ($shops as $shop)
                             <tr>
-                                <td><a href="{{ route('attribute.edit', $attribute->slug) }}">{{ $attribute->name }}</a></td>
-                                <td>{{ $attribute->seqn }}</td>
+                                <td><a href="{{ route('shop.edit', $shop->slug) }}">{{ $shop->name }}</a></td>
+                                <td>{{ $shop->seqn }}</td>
                                 <td style="font-size: 12px">
-                                    @foreach ($attribute->terms as $term)
-                                        <li style="display: inline-block; list-style: none; padding: 5px 10px; background: #ddd; border-radius: 5px; cursor: pointer; margin-right: 5px;"><a href="{{ route('term.edit', $term->slug) }}">{{ $term->name }}</a></li>
+                                    @foreach ($shop->counters as $counter)
+                                        <li style="display: inline-block; list-style: none; padding: 5px 10px; background: #ddd; border-radius: 5px; cursor: pointer; margin-right: 5px;"><a href="{{ route('counter.edit', $counter->slug) }}">{{ $counter->name }}</a></li>
                                     @endforeach
                                     <br/>
                                     <br/>
-                                    <a href="{{ route('term.page', $attribute->id) }}">Configure terms</a>
+                                    <a href="{{ route('counter.page', $shop->id) }}">Configure Counter</a>
                                 </td>
                                 <td class="text-center">
-                                    @if ($attribute->active)
+                                    @if ($shop->active)
                                         <p class="text-success text-bold">Active</p>
                                     @else
                                         <p class="text-danger text-bold">Inactive</p>
                                     @endif
                                 </td>
-                                {{-- <td class="text-right">
-                                    <form action="{{ route('attribute.trash', $attribute->slug) }}" style="display: inline-block" method="POST">
-                                        @method('DELETE')
-                                        @csrf
-                                        <button type="button" class="btn btn-danger btn-labeled btn-labeled-start btn-sm category-delete" title="Trash">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
-                                    </form>
-                                </td> --}}
                             </tr>
                         @endforeach
                     </tbody>

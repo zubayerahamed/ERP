@@ -16,4 +16,12 @@ class Outlet extends Model
         'active',
         'business_id'
     ];
+
+    public function shops(){
+        return $this->hasMany(Shop::class, 'outlet_id', 'id');
+    }
+
+    public function business(){
+        return $this->belongsTo(Business::class, 'business_id');
+    }
 }

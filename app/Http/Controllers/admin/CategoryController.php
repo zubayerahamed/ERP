@@ -9,11 +9,8 @@ class CategoryController extends KitController
 {
     public function index()
     {
-
-        $categories = Category::all();
-
         return view('admin.category', [
-            'categories' => $categories,
+            'categories' => Category::with('parentCategory')->get(),
             'category' => new Category()
         ]);
     }
@@ -49,7 +46,7 @@ class CategoryController extends KitController
     {
         $category = Category::where('slug', '=', $slug)->firstOrFail();
         return view('admin.category', [
-            'categories' => Category::all(),
+            'categories' => Category::with('parentCategory')->get(),
             'category' => $category,
         ]);
     }

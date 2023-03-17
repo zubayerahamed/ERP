@@ -16,4 +16,8 @@ class Business extends Model
         'active',
         'admin_id'
     ];
+
+    public function outlets(){
+        return $this->hasMany(Outlet::class, 'business_id', 'id');
+    }
 }

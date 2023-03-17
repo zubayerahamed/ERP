@@ -17,8 +17,13 @@ class Attribute extends Model
         'active'
     ];
 
-    public function getTerms()
+    public function terms()
     {
         return $this->hasMany(Term::class, 'attribute_id', 'id');
     }
+
+    // public function getTerms()
+    // {
+    //     return $this->hasMany(Term::class, 'attribute_id', 'id');
+    // }
 }

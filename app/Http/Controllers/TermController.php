@@ -20,12 +20,12 @@ class TermController extends KitController
 
     public function edit($slug)
     {
-        $term = Term::where('slug', '=', $slug)->firstOrFail();
+        $term = Term::with('attribute')->where('slug', '=', $slug)->firstOrFail();
 
         return view('admin.term', [
             'terms' => Term::where('attribute_id','=',$term->attribute_id)->get(),
             'term' => $term,
-            'attribute' => Attribute::find($term->attribute_id)
+            'attribute' => $term->attribute
         ]);
     }
 
@@ -37,7 +37,11 @@ class TermController extends KitController
         ]);
 
         $slug = $request->get('slug');
-        if ($slug == '') $slug = strtolower(str_replace(" ", "-", trim($request->get('name'))));
+        if ($slug == '') {
+            $slug = strtolower(str_replace(" ", "-", trim($request->get('name'))));
+        } else {
+            $slug = strtolower(str_replace(" ", "-", trim($request->get('slug'))));
+        }
 
         $rf = $request->all();
         $rf['slug'] = $slug;

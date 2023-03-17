@@ -75,5 +75,13 @@
                 </li>
             </ul>
         </li>
+        <li class="nav-item">
+            <a href="{{ route('business.page') }}" class="nav-link {{ Route::currentRouteName() == 'business.page' || Route::currentRouteName() == 'outlet.page' || Route::currentRouteName() == 'shop.page' || Route::currentRouteName() == 'counter.page' ? 'active' : '' }}">
+                <i class="fas fa-briefcase nav-icon"></i>
+                <p>
+                    Business
+                </p>
+            </a>
+        </li>
     </ul>
 </nav>

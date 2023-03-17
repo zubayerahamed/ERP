@@ -25,12 +25,13 @@ class Category extends Model
         return $value ? '/upload/category/' . $value : "/assets/admin-assets/img/category-default.png";
     }
 
-    public function getParentCategory()
+    public function parentCategory()
     {
         return $this->hasOne(Category::class, 'id', 'parent_category_id');
     }
 
-    public function getChildCategories()
+
+    public function childCategories()
     {
         return $this->hasMany(Category::class, 'parent_category_id', 'id');
     }
@@ -38,7 +39,7 @@ class Category extends Model
     public function getAllNestedChildCategoriesAttribute()
     {
         $allChildCategoeis = [];
-        foreach ($this->getChildCategories as $child) {
+        foreach ($this->childCategories as $child) {
             $allChildCategoeis = $this->loopThroughEachChild($child, $allChildCategoeis);
         }
         return $allChildCategoeis;
@@ -49,7 +50,7 @@ class Category extends Model
         if ($category == null) return $allChildCategoeis;
         array_push($allChildCategoeis, $category);
 
-        foreach ($category->getChildCategories as $child) {
+        foreach ($category->childCategories as $child) {
             $allChildCategoeis = $this->loopThroughEachChild($child, $allChildCategoeis);
         }
 
@@ -78,8 +79,8 @@ class Category extends Model
     public static function nestable($categories)
     {
         foreach ($categories as $category) {
-            if (!$category->getChildCategories->isEmpty()) {
-                $category->getChildCategories = self::nestable($category->children);
+            if (!$category->childCategories->isEmpty()) {
+                $category->childCategories = self::nestable($category->children);
             }
         }
 

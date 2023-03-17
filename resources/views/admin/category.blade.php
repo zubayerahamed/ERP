@@ -67,7 +67,7 @@
                         <select class="form-control select2bs4" name="parent_category_id">
                             <option value="">-- Select --</option>
                             @foreach ($category->allCategoriesExceptChildsAndSelf as $cat)
-                                <option value="{{ $cat->id }}" {{ $category->getParentCategory != null && $category->getParentCategory->id == $cat->id ? 'selected' : '' }}>{{ $cat->name }}</option>
+                                <option value="{{ $cat->id }}" {{ $category->parentCategory != null && $category->parentCategory->id == $cat->id ? 'selected' : '' }}>{{ $cat->name }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -120,8 +120,8 @@
                                 </td>
                                 <td><a href="{{ route('category.edit', $category->slug) }}">{{ $category->name }}</a></td>
                                 <td>
-                                    @if ($category->getParentCategory != null)
-                                        <a href="{{ route('category.edit', $category->getParentCategory->slug) }}">{{ $category->getParentCategory->name }}</a>
+                                    @if ($category->parentCategory != null)
+                                        <a href="{{ route('category.edit', $category->parentCategory->slug) }}">{{ $category->parentCategory->name }}</a>
                                     @endif
                                 </td>
                                 <td>{{ $category->seqn }}</td>

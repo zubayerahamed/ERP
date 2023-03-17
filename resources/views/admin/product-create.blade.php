@@ -105,7 +105,7 @@
                                         <div class="form-group">
                                             <div class="select2-purple">
                                                 <select id="terms-of-{{ $attribute->slug }}" class="select2" name="terms[]" multiple="multiple" data-placeholder="Select a State" data-dropdown-css-class="select2-purple" style="width: 100%;">
-                                                    @foreach ($attribute->getTerms as $term)
+                                                    @foreach ($attribute->terms as $term)
                                                         <option value="{{ $term->id }}" {{ $product->hasTerm($term->slug) ? 'selected' : '' }}>{{ $term->name }}</option>
                                                     @endforeach
                                                 </select>
@@ -170,7 +170,7 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <img src="{{ $product->getThumbnail != null ? $product->getThumbnail->file : '' }}" alt="" id="product-thumbnail" style="width: 100%" data-toggle="modal" data-target="#modal-xl">
+                                    <img src="{{ $product->thumbnail != null ? $product->thumbnail->file : '' }}" alt="" id="product-thumbnail" style="width: 100%" data-toggle="modal" data-target="#modal-xl">
                                 </div>
                             </div>
                             <input type="hidden" name="thumbnail_id" id="thumbnail">

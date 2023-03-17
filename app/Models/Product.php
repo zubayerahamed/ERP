@@ -20,7 +20,7 @@ class Product extends Model
         'active'
     ];
 
-    public function getThumbnail(){
+    public function thumbnail(){
         return $this->hasOne(Media::class, 'id', 'thumbnail_id');
     }
 

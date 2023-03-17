@@ -16,4 +16,8 @@ class Counter extends Model
         'active',
         'shop_id'
     ];
+
+    public function shop(){
+        return $this->belongsTo(Shop::class, 'shop_id');
+    }
 }

@@ -16,7 +16,7 @@ class ProductController extends KitController
     public function index()
     {
         return view('admin.products', [
-            'products' => Product::all()
+            'products' => Product::with('categories','thumbnail')->get()
         ]);
     }
 
@@ -24,10 +24,10 @@ class ProductController extends KitController
     {
 
         return view('admin.product-create', [
-            'categories' => Category::whereNull('parent_category_id')->get(),
+            'categories' => Category::with('childCategories')->whereNull('parent_category_id')->get(),
             'product' => new Product(),
             'medias' => Media::all(),
-            'attributes' => Attribute::all()
+            'attributes' => Attribute::with('terms')->get()
         ]);
     }
 
@@ -38,10 +38,10 @@ class ProductController extends KitController
         // dd($product->categories->all());
 
         return view('admin.product-create', [
-            'categories' => Category::whereNull('parent_category_id')->get(),
+            'categories' => Category::with('childCategories')->whereNull('parent_category_id')->get(),
             'product' => $product,
             'medias' => Media::all(),
-            'attributes' => Attribute::all()
+            'attributes' => Attribute::with('terms')->get()
         ]);
     }
 
