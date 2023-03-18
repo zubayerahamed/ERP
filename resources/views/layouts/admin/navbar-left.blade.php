@@ -50,7 +50,7 @@
                     </a>
                 </li>
             </ul>
-            
+
         </li>
         <li class="nav-item {{ Request::is('admin/media**') ? 'menu-open' : '' }}">
             <a href="#" class="nav-link {{ Request::is('admin/media**') ? 'active' : '' }}">
@@ -82,6 +82,47 @@
                     Business
                 </p>
             </a>
+        </li>
+        <li class="nav-item {{ Request::is('admin/role**') ? 'menu-open' : '' }}">
+            <a href="#" class="nav-link {{ Request::is('admin/media**') ? 'active' : '' }}">
+                <i class="fas fa-users-cog nav-icon"></i>
+                <p>
+                    Manage User
+                    <i class="right fas fa-angle-left"></i>
+                </p>
+            </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="{{ route('adminuser.list') }}" class="nav-link {{ Route::currentRouteName() == 'adminuser.list' ? 'active' : '' }}">
+                        <i class="fas fa-minus nav-icon"></i>
+                        <p>All Users</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('adminuser.add-new') }}" class="nav-link {{ Route::currentRouteName() == 'adminuser.add-new' ? 'active' : '' }}">
+                        <i class="fas fa-minus nav-icon"></i>
+                        <p>Add New User</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('role.list') }}" class="nav-link {{ Route::currentRouteName() == 'role.list' ? 'active' : '' }}">
+                        <i class="fas fa-minus nav-icon"></i>
+                        <p>Roles</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('role.add-new') }}" class="nav-link {{ Route::currentRouteName() == 'role.add-new' ? 'active' : '' }}">
+                        <i class="fas fa-minus nav-icon"></i>
+                        <p>Add New Role</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('capability-group.page') }}" class="nav-link {{ Route::currentRouteName() == 'capability-group.page' ? 'active' : '' }}">
+                        <i class="fas fa-minus nav-icon"></i>
+                        <p>Capabilities Group</p>
+                    </a>
+                </li>
+            </ul>
         </li>
     </ul>
 </nav>

@@ -6,11 +6,15 @@ use App\Http\Controllers\admin\AdminRegisterController;
 use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\DashboardController;
 use App\Http\Controllers\admin\ProductController;
+use App\Http\Controllers\AdminUserController;
 use App\Http\Controllers\AttributeController;
 use App\Http\Controllers\BusinessController;
+use App\Http\Controllers\CapabilityController;
+use App\Http\Controllers\CapabilityGroupController;
 use App\Http\Controllers\CounterController;
 use App\Http\Controllers\MediaController;
 use App\Http\Controllers\OutletController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\TermController;
 use Illuminate\Support\Facades\Route;
@@ -117,6 +121,41 @@ Route::prefix('admin')->group(function () {
         Route::put("/counter/{counter}", [CounterController::class, 'update'])->name("counter.update");
         Route::delete("/counter/{counter:slug}/trash", [CounterController::class, 'trash'])->name("counter.trash");
         Route::delete("/counter/{counter:slug}/delete", [CounterController::class, 'delete'])->name("counter.delete");
+
+
+        // Capability Group
+        Route::get("/capability-group", [CapabilityGroupController::class, 'index'])->name("capability-group.page");
+        Route::post("/capability-group", [CapabilityGroupController::class, 'save'])->name("capability-group.save");
+        Route::get("/capability-group/{id}", [CapabilityGroupController::class, 'edit'])->name("capability-group.edit");
+        Route::put("/capability-group/{capabilityGroup}", [CapabilityGroupController::class, 'update'])->name("capability-group.update");
+        Route::delete("/capability-group/{id}/trash", [CapabilityGroupController::class, 'trash'])->name("capability-group.trash");
+        Route::delete("/capability-group/{id}/delete", [CapabilityGroupController::class, 'delete'])->name("capability-group.delete");
+
+        // Capability
+        Route::get("/capability/{id}", [CapabilityController::class, 'index'])->name("capability.page");
+        Route::post("/capability", [CapabilityController::class, 'save'])->name("capability.save");
+        Route::get("/capability/{capability:slug}/edit", [CapabilityController::class, 'edit'])->name("capability.edit");
+        Route::put("/capability/{capability}", [CapabilityController::class, 'update'])->name("capability.update");
+        Route::delete("/capability/{capability:slug}/trash", [CapabilityController::class, 'trash'])->name("capability.trash");
+        Route::delete("/capability/{capability:slug}/delete", [CapabilityController::class, 'delete'])->name("capability.delete");
+    
+        // Role
+        Route::get("/role", [RoleController::class, 'index'])->name("role.list");
+        Route::get("/role/add-new", [RoleController::class, 'addNewPage'])->name("role.add-new");
+        Route::post("/role/save", [RoleController::class, 'save'])->name("role.save");
+        Route::get("/role/{role}/edit", [RoleController::class, 'edit'])->name("role.edit");
+        Route::put("/role/{role}/update", [RoleController::class, 'update'])->name("role.update");
+        Route::delete("/role/{role}/trash", [RoleController::class, 'trash'])->name("role.trash");
+        Route::delete("/role/{role}/delete", [RoleController::class, 'delete'])->name("role.delete");
+    
+        // Admin Users
+        Route::get("/adminuser", [AdminUserController::class, 'index'])->name("adminuser.list");
+        Route::get("/adminuser/add-new", [AdminUserController::class, 'addNewPage'])->name("adminuser.add-new");
+        Route::post("/adminuser/save", [AdminUserController::class, 'save'])->name("adminuser.save");
+        Route::get("/adminuser/{admin}/edit", [AdminUserController::class, 'edit'])->name("adminuser.edit");
+        Route::put("/adminuser/{admin}/update", [AdminUserController::class, 'update'])->name("adminuser.update");
+        Route::delete("/adminuser/{admin}/trash", [AdminUserController::class, 'trash'])->name("adminuser.trash");
+        Route::delete("/adminuser/{admin}/delete", [AdminUserController::class, 'delete'])->name("adminuser.delete");
     });
 });
 
