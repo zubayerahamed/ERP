@@ -124,15 +124,15 @@ Route::prefix('admin')->group(function () {
 
 
         // Capability Group
-        Route::get("/capability-group", [CapabilityGroupController::class, 'index'])->name("capability-group.page");
-        Route::post("/capability-group", [CapabilityGroupController::class, 'save'])->name("capability-group.save");
-        Route::get("/capability-group/{id}", [CapabilityGroupController::class, 'edit'])->name("capability-group.edit");
-        Route::put("/capability-group/{capabilityGroup}", [CapabilityGroupController::class, 'update'])->name("capability-group.update");
-        Route::delete("/capability-group/{id}/trash", [CapabilityGroupController::class, 'trash'])->name("capability-group.trash");
-        Route::delete("/capability-group/{id}/delete", [CapabilityGroupController::class, 'delete'])->name("capability-group.delete");
+        Route::get("/cg", [CapabilityGroupController::class, 'index'])->name("cg.page");
+        Route::post("/cg", [CapabilityGroupController::class, 'save'])->name("cg.save");
+        Route::get("/cg/{capabilityGroup}", [CapabilityGroupController::class, 'edit'])->name("cg.edit");
+        Route::put("/cg/{capabilityGroup}", [CapabilityGroupController::class, 'update'])->name("cg.update");
+        Route::delete("/cg/{capabilityGroup}/trash", [CapabilityGroupController::class, 'trash'])->name("cg.trash");
+        Route::delete("/cg/{capabilityGroup}/delete", [CapabilityGroupController::class, 'delete'])->name("cg.delete");
 
         // Capability
-        Route::get("/capability/{id}", [CapabilityController::class, 'index'])->name("capability.page");
+        Route::get("/capability/{capabilityGroup}", [CapabilityController::class, 'index'])->name("capability.page");
         Route::post("/capability", [CapabilityController::class, 'save'])->name("capability.save");
         Route::get("/capability/{capability:slug}/edit", [CapabilityController::class, 'edit'])->name("capability.edit");
         Route::put("/capability/{capability}", [CapabilityController::class, 'update'])->name("capability.update");

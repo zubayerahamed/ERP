@@ -117,7 +117,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('capability-group.page') }}" class="nav-link {{ Route::currentRouteName() == 'capability-group.page' ? 'active' : '' }}">
+                    <a href="{{ route('cg.page') }}" class="nav-link {{ Route::currentRouteName() == 'cg.page' ? 'active' : '' }}">
                         <i class="fas fa-minus nav-icon"></i>
                         <p>Capabilities Group</p>
                     </a>
