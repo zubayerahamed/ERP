@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('title');
             $table->text('shot_desc')->nullable();
             $table->text('desc')->nullable();
-            $table->foreignId('thumbnail')->nullable()->references('id')->on('media');
+            $table->foreignId('thumbnail_id')->nullable()->references('id')->on('media');
             $table->enum('status', ['PUBLISHED','PENDING_REVIEW'])->default('PUBLISHED');
             $table->date('published_date');
             $table->time('published_time', 0);

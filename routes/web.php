@@ -14,6 +14,7 @@ use App\Http\Controllers\CapabilityGroupController;
 use App\Http\Controllers\CounterController;
 use App\Http\Controllers\MediaController;
 use App\Http\Controllers\OutletController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\TermController;
@@ -59,6 +60,17 @@ Route::prefix('admin')->group(function () {
         Route::put("/category/{category}", [CategoryController::class, 'update'])->name("category.update");
         Route::delete("/category/{slug}", [CategoryController::class, 'delete'])->name("category.delete");
         Route::post('/category/image/{category}', [CategoryController::class, 'updateImage'])->name('category.image');
+
+
+        // Post
+        Route::get("/post", [PostController::class, 'index'])->name("post");
+        Route::get("/post/add-new", [PostController::class, 'add'])->name("post.add-new");
+        Route::post("/post/save", [PostController::class, 'save'])->name("post.save");
+        Route::get("/post/{post}/edit", [PostController::class, 'edit'])->name("post.edit");
+        Route::put("/post/{post}/update", [PostController::class, 'update'])->name("post.update");
+        Route::delete("/post/{post}/trash", [PostController::class, 'trash'])->name("post.trash");
+        Route::delete("/post/{post}/delete", [PostController::class, 'delete'])->name("post.delete");
+
 
         // Product
         Route::get("/products", [ProductController::class, 'index'])->name("product.list");

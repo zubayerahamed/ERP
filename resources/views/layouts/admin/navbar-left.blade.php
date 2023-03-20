@@ -10,6 +10,42 @@
                 </p>
             </a>
         </li>
+        <li class="nav-item {{ Request::is('admin/post**') || Request::is('admin/category**') || Request::is('admin/tag**') ? 'menu-open' : '' }}">
+            <a href="#" class="nav-link {{ Request::is('admin/post**') || Request::is('admin/category**') || Request::is('admin/tag**') ? 'active' : '' }}">
+                <i class="fas fa-pencil-alt nav-icon"></i>
+                <p>
+                    Posts
+                    <i class="right fas fa-angle-left"></i>
+                </p>
+            </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="{{ route('post') }}" class="nav-link {{ Route::currentRouteName() == 'post' ? 'active' : '' }}">
+                        <i class="fas fa-minus nav-icon"></i>
+                        <p>All Posts</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('post.add-new') }}" class="nav-link {{ Route::currentRouteName() == 'post.add-new' ? 'active' : '' }}">
+                        <i class="fas fa-minus nav-icon"></i>
+                        <p>Add New</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('category.page') }}" class="nav-link {{ Route::currentRouteName() == 'category.page' ? 'active' : '' }}">
+                        <i class="fas fa-minus nav-icon"></i>
+                        <p>Categories</p>
+                    </a>
+                </li>
+                {{-- <li class="nav-item">
+                    <a href="{{ route('tag.page') }}" class="nav-link {{ Route::currentRouteName() == 'tag.page' ? 'active' : '' }}">
+                        <i class="fas fa-minus nav-icon"></i>
+                        <p>Tags</p>
+                    </a>
+                </li> --}}
+            </ul>
+
+        </li>
         <li class="nav-item {{ Request::is('admin/term**') || Request::is('admin/attribute**') || Request::is('admin/product**') || Request::is('admin/category**') ? 'menu-open' : '' }}">
             <a href="#" class="nav-link {{ Request::is('admin/term**') || Request::is('admin/attribute**') || Request::is('admin/product**') || Request::is('admin/category**') ? 'active' : '' }}">
                 <i class="nav-icon fas fa-box"></i>

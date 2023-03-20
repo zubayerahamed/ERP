@@ -173,7 +173,7 @@
                                     <img src="{{ $product->thumbnail != null ? $product->thumbnail->file : '' }}" alt="" id="product-thumbnail" style="width: 100%" data-toggle="modal" data-target="#modal-xl">
                                 </div>
                             </div>
-                            <input type="hidden" name="thumbnail_id" id="thumbnail">
+                            <input type="hidden" name="thumbnail_id" id="thumbnail" value="{{ old('thumbnail_id', $product->thumbnail_id) }}">
                         </div>
                         <div class="card-footer">
                             <a href="#" class="text-danger remove-product-image {{ $product->getThumbnail == null ? 'nodisplay' : '' }}">Remove product image</a>
