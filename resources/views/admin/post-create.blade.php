@@ -201,7 +201,6 @@
 @section('vendor-scripts')
     <x-data-table-js></x-data-table-js>
     <x-select2-js></x-select2-js>
-    <script src="{{ asset('/assets/admin-assets/ckeditor/ckeditor.js') }}"></script>
 @endsection
 @section('custom-page-scripts')
     <script>
