@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('short_desc')->nullable();
-            $table->string('desc')->nullable();
+            $table->text('short_desc')->nullable();
+            $table->text('desc')->nullable();
             $table->foreignId('thumbnail_id')->nullable()->references('id')->on('media');
             $table->boolean('active')->default(true);
             $table->softDeletes();
