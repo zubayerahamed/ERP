@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name')->unique();
             $table->string('slug')->unique();
+            $table->integer('seqn')->default(0);
             $table->foreignId('capability_group_id')->references('id')->on('capability_groups')->onDelete('cascade');
             $table->timestamps();
         });

@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('capability_groups', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->integer('seqn')->default(0);
             $table->timestamps();
         });
     }

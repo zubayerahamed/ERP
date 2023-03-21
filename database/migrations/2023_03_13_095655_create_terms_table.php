@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('terms', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('slug');
+            $table->string('slug')->unique();
             $table->string('color')->nullable();
             $table->foreignId('attribute_id')->reference('id')->on('attributes')->onDelete('cascade');
             $table->integer('seqn')->default(0);

@@ -12,9 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('roles_capabilities', function (Blueprint $table) {
-            $table->foreignId('capability_id')->references('id')->on('capabilities')->onDelete('cascade');
             $table->foreignId('role_id')->references('id')->on('roles')->onDelete('cascade');
-            $table->primary(['capability_id','role_id']);
+            $table->foreignId('capability_id')->references('id')->on('capabilities')->onDelete('cascade');
+            $table->primary(['role_id', 'capability_id']);
             $table->timestamps();
         });
     }

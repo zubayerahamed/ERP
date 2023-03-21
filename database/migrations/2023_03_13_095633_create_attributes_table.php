@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('attributes', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('slug');
-            $table->enum('filter_type', ['RADIO', 'CHECKBOX']);
+            $table->string('slug')->unique();
+            $table->enum('filter_type', ['RADIO', 'CHECKBOX'])->default('CHECKBOX');
             $table->integer('seqn')->default(0);
             $table->boolean('active')->default(true);
             $table->softDeletes();

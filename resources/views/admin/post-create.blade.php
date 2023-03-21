@@ -5,6 +5,13 @@
 @section('vendor-styles')
     <x-data-table-css></x-data-table-css>
     <x-select2-css></x-select2-css>
+
+    <!-- include codemirror (codemirror.css, codemirror.js, xml.js, formatting.js) -->
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/codemirror.css">
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/theme/monokai.css">
+
+    <!-- summernote -->
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
 @endsection
 @section('custom-page-styles')
     <style>
@@ -78,7 +85,7 @@
                         <!-- /.card-header -->
                         <div class="card-body">
                             <div class="form-group">
-                                <textarea class="form-control ckeditor" name="desc" id="desc">{{ old('desc', $post->desc) }}</textarea>
+                                <textarea class="form-control summernote" name="desc" rows="10">{{ old('desc', $post->desc) }}</textarea>
                                 @error('desc')
                                     <div class="form-text text-danger"><i class="ph-x-circle me-1"></i>{{ $message }}</div>
                                 @enderror
@@ -201,10 +208,43 @@
 @section('vendor-scripts')
     <x-data-table-js></x-data-table-js>
     <x-select2-js></x-select2-js>
+
+    <!-- CodeMirror -->
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/codemirror.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/mode/xml/xml.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/codemirror/2.36.0/formatting.js"></script>
+
+    <!-- Summernote -->
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
 @endsection
 @section('custom-page-scripts')
     <script>
         $(document).ready(function() {
+            $('.summernote').summernote({
+                tabsize: 2,
+                height: 300,
+                codemirror: {
+                    theme: 'monokai'
+                },
+                toolbar: [
+                    ['style', ['style']],
+                    ['font', ['bold', 'underline', 'clear']],
+                    ['color', ['color']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['table', ['table']],
+                    ['insert', ['link', 'picture', 'video']],
+                    ['view', ['fullscreen', 'codeview', 'help']]
+                ]
+            })
+
+            // CodeMirror
+            if ($('#codeMirrorDemo').length > 0) {
+                CodeMirror.fromTextArea(document.getElementById("codeMirrorDemo"), {
+                    mode: "htmlmixed",
+                    theme: "monokai"
+                });
+            }
+
             $('.media-container').off('click').on('click', function(e) {
                 e.preventDefault();
                 var srcUrl = $(this).data('src');
