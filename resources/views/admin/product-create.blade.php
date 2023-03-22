@@ -2,10 +2,6 @@
 @push('title')
     <title>Admin - {{ $product->id != null ? 'Edit Product' : 'Add New Product' }}</title>
 @endpush
-@section('vendor-styles')
-    <x-data-table-css></x-data-table-css>
-    <x-select2-css></x-select2-css>
-@endsection
 @section('custom-page-styles')
     <style>
         .media-wrapper {
@@ -232,10 +228,6 @@
         </div>
         <!-- /.modal-dialog -->
     </div>
-@endsection
-@section('vendor-scripts')
-    <x-data-table-js></x-data-table-js>
-    <x-select2-js></x-select2-js>
 @endsection
 @section('custom-page-scripts')
     <script>

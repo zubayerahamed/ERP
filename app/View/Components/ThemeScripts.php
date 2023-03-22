@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class DataTableJs extends Component
+class ThemeScripts extends Component
 {
     /**
      * Create a new component instance.
@@ -21,6 +21,6 @@ class DataTableJs extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.data-table-js');
+        return view('components.theme-scripts');
     }
 }

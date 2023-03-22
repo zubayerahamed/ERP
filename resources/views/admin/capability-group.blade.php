@@ -2,9 +2,6 @@
 @push('title')
     <title>Admin - Capability Group</title>
 @endpush
-@section('vendor-styles')
-    <x-data-table-css></x-data-table-css>
-@endsection
 @push('content-heading')
     <x-content-heading pageHeading="Capability Group" showBredCrumb="true"></x-content-heading>
 @endpush
@@ -84,12 +81,4 @@
         <!-- /.card -->
     </div>
 
-@endsection
-@section('vendor-scripts')
-    <x-data-table-js></x-data-table-js>
-@endsection
-@section('custom-page-scripts')
-    <script>
-        
-    </script>
 @endsection

@@ -7,6 +7,14 @@ use Illuminate\Http\Request;
 
 class CategoryController extends KitController
 {
+
+    public function categoryForm(){
+        return view('layouts.inc.category-create-form', [
+            'categories' => Category::with('parentCategory')->get(),
+            'category' => new Category()
+        ]);
+    }
+
     public function index()
     {
         return view('admin.category', [

@@ -54,6 +54,7 @@ Route::prefix('admin')->group(function () {
         Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard');
 
         // Category
+        Route::get("/category/form", [CategoryController::class, 'categoryForm'])->name("category.form");
         Route::get("/category", [CategoryController::class, 'index'])->name("category.page");
         Route::post("/category", [CategoryController::class, 'save'])->name("category.save");
         Route::get("/category/{slug}", [CategoryController::class, 'edit'])->name("category.edit");

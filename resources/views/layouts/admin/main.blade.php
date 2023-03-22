@@ -10,14 +10,12 @@
     <div class="content">
         <div class="container-fluid">
             <div class="row">
-
                 @yield('admin-main')
-
             </div>
-            <!-- /.row -->
         </div><!-- /.container-fluid -->
     </div>
     <!-- /.content -->
+
 </div>
 <!-- /.content-wrapper -->
 @include('layouts.admin.sidebar-right')

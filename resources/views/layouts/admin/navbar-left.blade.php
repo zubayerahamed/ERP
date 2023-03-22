@@ -120,7 +120,7 @@
             </a>
         </li>
         <li class="nav-item {{ Request::is('admin/role**') ? 'menu-open' : '' }}">
-            <a href="#" class="nav-link {{ Request::is('admin/media**') ? 'active' : '' }}">
+            <a href="#" class="nav-link {{ Request::is('admin/role**') ? 'active' : '' }}">
                 <i class="fas fa-users-cog nav-icon"></i>
                 <p>
                     Manage User

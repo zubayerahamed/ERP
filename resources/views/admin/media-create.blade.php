@@ -2,11 +2,6 @@
 @push('title')
     <title>Admin - Upload New Media</title>
 @endpush
-@section('vendor-styles')
-    <x-data-table-css></x-data-table-css>
-    <!-- dropzonejs -->
-    <link rel="stylesheet" href="{{ asset('/assets/admin-assets/css/dropzone.min.css') }}">
-@endsection
 @push('content-heading')
     <x-content-heading pageHeading="Upload New Media file" showBredCrumb="true"></x-content-heading>
 @endpush
@@ -86,11 +81,6 @@
     </div>
     <!-- /.card -->
     </div>
-@endsection
-@section('vendor-scripts')
-    <x-data-table-js></x-data-table-js>
-    <!-- dropzonejs -->
-    <script src="{{ asset('/assets/admin-assets/js/dropzone.min.js') }}"></script>
 @endsection
 @section('custom-page-scripts')
     <script>

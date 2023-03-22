@@ -22,40 +22,35 @@ class MediaController extends KitController
 
     public function save(Request $request)
     {
+        $uploadedFile = $request->file('file');
+        $mediaType = $uploadedFile->getMimeType();
+        $fileOriginalName = $uploadedFile->getClientOriginalName();
+        $fileExtention = $uploadedFile->getClientOriginalExtension();
 
-        $image = $request->file('file');
-        $mediaType = $image->getMimeType();
-        $originalName = $image->getClientOriginalName();
-        $extention = pathinfo($originalName, PATHINFO_EXTENSION);
+        if (!in_array('.' . $fileExtention, Media::supportedFileExt)) return response()->json(['status' => 'error', 'message' => 'File not supported']);
 
-        // $uploadPath = 'upload/media/' . date('Y') . '/' . date('m') . '/' . date('d');
-        // $fullDirectory = public_path($uploadPath);
-        $newFileName = uniqid() . '.' . $extention;
+        $uploadPath = 'uploads/media/' . date('Y') . '/' . date('m') . '/' . date('d');
 
-        // $image->move($fullDirectory, $newFileName);
+        $newFileName = uniqid() . '.' . $fileExtention;
 
-        // $media = new Media();
-        // $media->title = $newFileName;
-        // $media->original_name = $originalName;
-        // $media->media_type = $mediaType;
-        // $media->file_path = '/' . $uploadPath . '/';
+        $uploadone = $uploadedFile->storeAs($uploadPath, $newFileName, 'public');
+        if (!$uploadone) return response()->json(['status' => 'error', 'message' => 'File not uploaded']);
 
-        // $saved = $media->save();
+        $media = new Media();
+        $media->title = $newFileName;
+        $media->original_name = $fileOriginalName;
+        $media->media_type = $mediaType;
+        $media->file_path = '/' . $uploadPath . '/';
+        $media->use_for_global = true;
+        $media->user_id = auth('admin')->id();
 
-        //Storage::put('public/', $request->file('file'));
-        //$image->store('uploads');
-        $image->storeAs("uploads", $newFileName, 'public');
-        //$fileName = time().'_'.$request->file->getClientOriginalName();
-        //$filePath = $request->file('file')->storeAs('uploads', $fileName, 'public');
+        $saved = $media->save();
+        if (!$saved) {
+            // Delete file from storage
+            unlink($uploadone);
+            return response()->json(['status' => 'error', 'message' => 'File not uploaded']);
+        }
 
-        // if ($saved) {
-        //     return response()->json([
-        //         'status' => 'success',
-        //         'message' => 'File uploaded successfully',
-        //         'filename' => $media->file_path . $media->title
-        //     ]);
-        // }
-
-        return response()->json(['status' => 'error', 'message' => 'File not uploaded']);
+        return response()->json(['status' => 'error', 'message' => 'File uploaded', 'media' => $media]);
     }
 }

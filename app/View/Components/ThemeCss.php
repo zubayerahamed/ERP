@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class select2-js extends Component
+class ThemeCss extends Component
 {
     /**
      * Create a new component instance.
@@ -21,6 +21,6 @@ class select2-js extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.select2-js');
+        return view('components.theme-css');
     }
 }

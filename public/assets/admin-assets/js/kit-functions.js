@@ -1,3 +1,37 @@
+function getBasepath() {
+    var basePath = $("a.basePath").attr("href");
+    basePath = basePath.split("/")[1];
+    var href = location.href.split("/");
+    if (basePath != "") {
+        return href[0] + "//" + href[2] + "/" + basePath;
+    }
+    return href[0] + "//" + href[2];
+}
+
+function getAdminBasepath() {
+    var basePath = $("a.adminBasePath").attr("href");
+    basePath = basePath.split("/")[1];
+    var href = location.href.split("/");
+    if (basePath != "") {
+        return href[0] + "//" + href[2] + "/" + basePath + "/" + href[3];
+    }
+    return href[0] + "//" + href[2] + "/" + href[3];
+}
+
+/**
+ * Loading mask object
+ * function1 : show  -- Show loading mask
+ * function2 : hide  -- Hide loading mask
+ */
+var loadingMask2 = {
+    show : function(){
+        $('div#loadingmask2, div.loadingdots, div#loadingdots').removeClass('nodisplay');
+    },
+    hide : function(){
+        $('div#loadingmask2, div.loadingdots, div#loadingdots').addClass('nodisplay');
+    }
+}
+
 // DataTable initialization with Buttons Feature
 if ($("table.data-table").length > 0) {
     $("table.data-table").each(function (tindex, table) {
@@ -32,16 +66,16 @@ if ($("table.data-table").length > 0) {
 //Initialize Select2 Elements
 if ($(".select2").length > 0) {
     $(".select2").select2();
-    $(document).on('select2:open', () => {
-        document.querySelector('.select2-search__field').focus();
+    $(document).on("select2:open", () => {
+        document.querySelector(".select2-search__field").focus();
     });
 }
 if ($(".select2bs4").length > 0) {
     $(".select2bs4").select2({
         theme: "bootstrap4",
     });
-    $(document).on('select2:open', () => {
-        document.querySelector('.select2-search__field').focus();
+    $(document).on("select2:open", () => {
+        document.querySelector(".select2-search__field").focus();
     });
 }
 
@@ -93,8 +127,3 @@ function submitForm(mainform) {
         },
     });
 }
-
-
-
-
-

@@ -2,9 +2,6 @@
 @push('title')
     <title>Admin - Product</title>
 @endpush
-@section('vendor-styles')
-    <x-data-table-css></x-data-table-css>
-@endsection
 @push('content-heading')
     <x-content-heading pageHeading="Product" showBredCrumb="true"></x-content-heading>
 @endpush
@@ -60,10 +57,4 @@
         </div>
         <!-- /.card -->
     </div>
-@endsection
-@section('vendor-scripts')
-    <x-data-table-js></x-data-table-js>
-@endsection
-@section('custom-page-scripts')
-    <script></script>
 @endsection

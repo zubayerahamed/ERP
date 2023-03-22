@@ -2,15 +2,13 @@
 @push('title')
     <title>Admin - Category</title>
 @endpush
-@section('vendor-styles')
-    <x-data-table-css></x-data-table-css>
-    <x-select2-css></x-select2-css>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.6/cropper.css" />
+@section('custom-page-styles')
     <style>
-        .avatar-input{
+        .avatar-input {
             display: none !important;
         }
-        .avatar-img:hover{
+
+        .avatar-img:hover {
             opacity: 0.2 !important;
             cursor: pointer;
         }
@@ -19,6 +17,7 @@
             display: block;
             max-width: 100%;
         }
+
         .preview {
             text-align: center;
             overflow: hidden;
@@ -27,6 +26,7 @@
             margin: 0 auto;
             border: 1px solid red;
         }
+
         .section {
             margin-top: 150px;
             background: #fff;
@@ -179,12 +179,6 @@
             </div>
         </div>
     </div>
-
-@endsection
-@section('vendor-scripts')
-    <x-data-table-js></x-data-table-js>
-    <x-select2-js></x-select2-js>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.6/cropper.js"></script>
 @endsection
 @section('custom-page-scripts')
     <script>

@@ -2,19 +2,16 @@
 @push('title')
     <title>Admin - Media</title>
 @endpush
-@section('vendor-styles')
-    <x-data-table-css></x-data-table-css>
-@endsection
 @section('custom-page-styles')
     <style>
-        .media-wrapper{
+        .media-wrapper {
             display: flex;
             flex-wrap: wrap;
-            justify-content: space-between;
         }
+
         .media-container {
-            width: 150px;
-            height: 150px;
+            width: 120px;
+            height: 120px;
             padding: 10px;
             margin: 10px;
             border: 1px dotted rgb(87, 86, 86);
@@ -22,7 +19,6 @@
             box-sizing: border-box;
             float: left;
             overflow: hidden;
-            border-radius: 10px;
             box-shadow: 0px 0px 5px #ddd;
             cursor: pointer;
         }
@@ -31,8 +27,8 @@
             width: 100%;
         }
 
-        .media-container:hover{
-            opacity: 0.5;
+        .media-container:hover {
+            opacity: 0.75;
         }
     </style>
 @endsection
@@ -61,10 +57,4 @@
         </div>
         <!-- /.card -->
     </div>
-@endsection
-@section('vendor-scripts')
-    <x-data-table-js></x-data-table-js>
-@endsection
-@section('custom-page-scripts')
-    <script></script>
 @endsection

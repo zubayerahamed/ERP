@@ -3,9 +3,6 @@
     <title>Admin - {{ $post->id != null ? 'Edit Post' : 'Add New Post' }}</title>
 @endpush
 @section('vendor-styles')
-    <x-data-table-css></x-data-table-css>
-    <x-select2-css></x-select2-css>
-
     <!-- include codemirror (codemirror.css, codemirror.js, xml.js, formatting.js) -->
     <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/codemirror.css">
     <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/theme/monokai.css">
@@ -101,7 +98,7 @@
                         <!-- /.card-header -->
                         <div class="card-body">
                             <div class="form-group">
-                                <textarea class="form-control" name="short_desc">{{ old('short_desc', $post->short_desc) }}</textarea>
+                                <textarea class="form-control" name="short_desc" id="editor">{{ old('short_desc', $post->short_desc) }}</textarea>
                                 @error('short_desc')
                                     <div class="form-text text-danger"><i class="ph-x-circle me-1"></i>{{ $message }}</div>
                                 @enderror
@@ -138,7 +135,7 @@
                             </div>
                         </div>
                         <div class="card-footer">
-                            <a href="#" class="text-primary" data-toggle="modal" data-target="#category-modal">Add New Category</a>
+                            <a href="#" class="text-primary create-new-category-link" data-toggle="modal" data-target="#category-create-modal">Add New Category</a>
                         </div>
                     </div>
 
@@ -178,6 +175,33 @@
     </form>
 
 
+
+    <div class="modal fade" id="category-create-modal">
+        <div class="modal-dialog modal-m">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Create Category</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="category-create-from-wrapper">
+                        category form
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+
+
+
+
     <div class="modal fade" id="modal-xl">
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
@@ -206,9 +230,6 @@
     </div>
 @endsection
 @section('vendor-scripts')
-    <x-data-table-js></x-data-table-js>
-    <x-select2-js></x-select2-js>
-
     <!-- CodeMirror -->
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/codemirror.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/mode/xml/xml.js"></script>
@@ -220,6 +241,27 @@
 @section('custom-page-scripts')
     <script>
         $(document).ready(function() {
+
+            $('.create-new-category-link').off('click').on('click', function(e) {
+                
+                loadingMask2.show();
+                $.ajax({
+                    url: '{{ route('category.form') }}',
+                    type: 'GET',
+                    success: function(data) {
+                        loadingMask2.hide();
+                        $('.category-create-from-wrapper').html("");
+                        $('#create-new-category-modal').modal('show');
+                        $('.category-create-from-wrapper').append(data);
+                    },
+                    error: function(jqXHR, status, errorThrown) {
+                        loadingMask2.hide();
+                    }
+                });
+
+            })
+
+
             $('.summernote').summernote({
                 tabsize: 2,
                 height: 300,
