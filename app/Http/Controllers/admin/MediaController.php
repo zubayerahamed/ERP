@@ -27,7 +27,14 @@ class MediaController extends KitController
         $fileOriginalName = $uploadedFile->getClientOriginalName();
         $fileExtention = $uploadedFile->getClientOriginalExtension();
 
-        if (!in_array('.' . $fileExtention, Media::supportedFileExt)) return response()->json(['status' => 'error', 'message' => 'File not supported']);
+        $supportedFileExt = [
+            ".jpg", ".jpeg", ".png", ".gif", ".ico",
+            ".pdf", ".doc", ".docx", ".ppt", ".pptx", ".pps", ".ppsx", ".odt", ".xls", ".xlsx", ".PSD",
+            ".mp3", ".m4a", ".ogg", ".wav",
+            ".mp4", ".m4v", ".mov", ".wmv", ".avi", ".mpg", ".ogv", ".3gp", ".3g2"
+        ];
+
+        if (!in_array('.' . $fileExtention, $supportedFileExt)) return response()->json(['status' => 'error', 'message' => 'File not supported']);
 
         $uploadPath = 'uploads/media/' . date('Y') . '/' . date('m') . '/' . date('d');
 

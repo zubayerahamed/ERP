@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('user_id')->nullable()->references('id')->on('users')->onDelete('cascade');
             $table->foreignId('admin_id')->nullable()->references('id')->on('admins')->onDelete('cascade');
             $table->enum('like', ['LIKE','DISLIKE','NONE'])->default('NONE');
-            $table->integer('rating')->default(0);
+            $table->integer('rate')->default(0);
             $table->timestamps();
         });
     }

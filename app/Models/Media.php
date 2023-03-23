@@ -11,13 +11,6 @@ class Media extends Model
     use HasFactory;
     use SoftDeletes;
 
-    public $supportedFileExt = [
-        ".jpg", ".jpeg", ".png", ".gif", ".ico",
-        ".pdf", ".doc", ".docx", ".ppt", ".pptx", ".pps", ".ppsx", ".odt", ".xls", ".xlsx", ".PSD",
-        ".mp3", ".m4a", ".ogg", ".wav",
-        ".mp4", ".m4v", ".mov", ".wmv", ".avi", ".mpg", ".ogv", ".3gp", ".3g2"
-    ];
-
     protected $fillable = [
         'title',
         'original_name',
