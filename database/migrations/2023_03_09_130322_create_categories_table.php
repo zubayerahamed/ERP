@@ -14,13 +14,15 @@ return new class extends Migration
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->text('desc')->nullable();
             $table->string('slug')->unique();
             $table->foreignId('parent_category_id')->nullable()->references('id')->on('categories');
-            $table->string('image')->nullable();
             $table->integer('seqn')->default(0);
-            $table->boolean('active')->default(true);
-            $table->softDeletes();
+            $table->boolean('system_defined')->default(false);
+            $table->string('thumbnail')->nullable();
+            $table->string('icon')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

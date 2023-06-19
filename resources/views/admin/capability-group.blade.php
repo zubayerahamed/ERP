@@ -65,7 +65,7 @@
                                 <td>{{ $cg->seqn }}</td>
                                 <td style="font-size: 12px">
                                     @foreach ($cg->capabilities as $cap)
-                                        <li style="display: inline-block; list-style: none; padding: 5px 10px; background: #ddd; border-radius: 5px; cursor: pointer; margin-right: 5px;"><a href="{{ route('capability.edit', $cap->slug) }}">{{ $cap->name }}</a></li>
+                                        <li style="display: inline-block; list-style: none; padding: 5px 10px; background: #ddd; border-radius: 5px; cursor: pointer; margin: 5px 5px 10px 0px;"><a href="{{ route('capability.edit', $cap->slug) }}">{{ $cap->name }}</a></li>
                                     @endforeach
                                     <br/>
                                     <br/>

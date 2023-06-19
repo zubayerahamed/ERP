@@ -12,14 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('counters', function (Blueprint $table) {
-            $table->id();
+            $table->string('id');
             $table->string('name');
-            $table->string('slug')->unique();
             $table->integer('seqn')->default(0);
-            $table->boolean('active')->default(false);
             $table->foreignId('shop_id')->references('id')->on('shops')->onDelete('cascade');
-            $table->softDeletes();
+            $table->unique(['id', 'shop_id']);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

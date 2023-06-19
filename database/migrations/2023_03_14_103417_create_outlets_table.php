@@ -12,14 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('outlets', function (Blueprint $table) {
-            $table->id();
+            $table->string('id')->unique();
             $table->string('name');
-            $table->string('slug')->unique();
             $table->integer('seqn')->default(0);
-            $table->boolean('active')->default(false);
             $table->foreignId('business_id')->references('id')->on('businesses')->onDelete('cascade');
-            $table->softDeletes();
+            $table->unique(['id', 'business_id']);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

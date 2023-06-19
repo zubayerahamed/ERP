@@ -12,14 +12,18 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('businesses', function (Blueprint $table) {
-            $table->id();
+            $table->string('id')->unique();
             $table->string('name');
-            $table->string('slug')->unique();
-            $table->integer('seqn')->default(0);
-            $table->boolean('active')->default(false);
-            $table->foreignId('admin_id')->references('id')->on('admins')->onDelete('cascade');
-            $table->softDeletes();
+            $table->enum('business_type', ['CENTRAL','OUTLET','SHOP']);
+            $table->text('address')->nullable();
+            $table->string('logo')->nullable();
+            $table->string('tin_no')->nullable();
+            $table->string('vat_registration_no')->nullable();
+            $table->string('website')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('email')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
