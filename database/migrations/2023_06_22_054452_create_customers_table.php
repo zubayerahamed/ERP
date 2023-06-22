@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('attributes', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('slug')->unique();
-            $table->integer('seqn')->default(0);
-            $table->foreignId('business_id')->references('id')->on('business')->onDelete('cascade');
+        Schema::create('customers', function (Blueprint $table) {
+            $table->string('id');
+            $table->string('name')->nullable();
+            $table->text('address')->nullable();
+            $table->string('mobile');
+            $table->foreignId('business_id')->references('id')->on('businesses')->onDelete('cascade');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('attributes');
+        Schema::dropIfExists('customers');
     }
 };

@@ -17,7 +17,11 @@ return new class extends Migration
             $table->text('short_desc')->nullable();
             $table->text('desc')->nullable();
             $table->foreignId('thumbnail_id')->nullable()->references('id')->on('media');
-            $table->boolean('active')->default(true);
+            $table->foreignId('category_id')->references('id')->on('categories');
+            $table->boolean('variable_product')->default(false);
+            $table->foreignId('business_id')->references('id')->on('business')->onDelete('cascade');
+            $table->float('rate', 8, 2)->default(0);
+            $table->string('unit');
             $table->softDeletes();
             $table->timestamps();
         });

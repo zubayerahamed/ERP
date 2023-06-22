@@ -11,15 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('terms', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('attribute_id')->reference('id')->on('attributes')->onDelete('cascade');
-            $table->string('name');
-            $table->string('slug')->unique();
+        Schema::create('codes', function (Blueprint $table) {
+            $table->string('code_type');
+            $table->string('code');
+            $table->text('desc')->nullable();
             $table->integer('seqn')->default(0);
-            $table->foreignId('business_id')->references('id')->on('business')->onDelete('cascade');
-            $table->softDeletes();
+            $table->foreignId('business_id')->references('id')->on('businesses')->onDelete('cascade');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -28,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('terms');
+        Schema::dropIfExists('codes');
     }
 };

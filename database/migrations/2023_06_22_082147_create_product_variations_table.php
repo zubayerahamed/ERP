@@ -11,11 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('attributes', function (Blueprint $table) {
+        Schema::create('product_variations', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('slug')->unique();
-            $table->integer('seqn')->default(0);
+            $table->foreignId('product_id')->references('id')->on('products')->onDelete('cascade');
+            $table->foreignId('attribute_id')->references('id')->on('attributes')->onDelete('cascade');
+            $table->foreignId('term_id')->references('id')->on('terms')->onDelete('cascade');
+            $table->primary(['product_id', 'attribute_id', 'term_id']);
+            $table->float('rate', 8, 2)->default(0);
             $table->foreignId('business_id')->references('id')->on('business')->onDelete('cascade');
             $table->timestamps();
             $table->softDeletes();
@@ -27,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('attributes');
+        Schema::dropIfExists('product_variations');
     }
 };
